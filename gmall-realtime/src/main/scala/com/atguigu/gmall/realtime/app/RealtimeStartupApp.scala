@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON
 import com.atguigu.gmall.constant.GmallConstants
 import com.atguigu.gmall.realtime.bean.StartUpLog
 import com.atguigu.gmall.realtime.util.{MyKafkaUtil, RedisUtil}
+import com.atguigu.gmall.util.MyEsUtil
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
@@ -45,6 +46,7 @@ object RealtimeStartupApp {
     //过滤
 
     val dauFilterDStream: DStream[StartUpLog] = startupLogDstream.transform(rdd => {
+      //println("第一处，count="+rdd.count())
       val dateStr = new SimpleDateFormat("yyyy-MM-dd").format(new Date())
       val jedisClient = RedisUtil.getJedisClient
       val key = "dau:" + dateStr
@@ -55,7 +57,7 @@ object RealtimeStartupApp {
         val dauList: util.Set[String] = likelike.value
         !dauList.contains(rrd.mid)
       }
-      println("count="+daufilter.count())
+      //println("第二处，count="+daufilter.count())
       daufilter
     })
 
@@ -75,14 +77,23 @@ object RealtimeStartupApp {
 
     dauFlatMap.foreachRDD(rdd => {
 
-      println("count="+rdd.count())
+      //println("第三处，count="+rdd.count())
       rdd.foreachPartition(datas => {
+
+        //可迭代集合只能使用一次
+
+
         val jedisClient = RedisUtil.getJedisClient
-        datas.foreach { data =>
+        val list: List[StartUpLog] = datas.toList
+        list.foreach { data =>
           val key = "dau:" + data.logDate
           val value = data.mid
           jedisClient.sadd(key, value)
         }
+        //存入ES
+        val str = "{\"area\":\"test03\",\"uid\":\"41\",\"itemid\":27,\"npgid\":36,\"evid\":\"addFavor\",\"os\":\"andriod\",\"pgid\":14,\"appid\":\"gmall12138\",\"mid\":\"mid_418\",\"type\":\"event\"}"
+
+        MyEsUtil.indexBulk(GmallConstants.ES_INDEX_DAU,list)
         jedisClient.close()
       })
     })
