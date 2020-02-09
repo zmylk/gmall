@@ -19,6 +19,7 @@ public class CanalApp {
             //连接、订阅、抓取数据
             canalConnector.connect();
             canalConnector.subscribe("gmalldb.order_info");
+            //获得message
             Message message = canalConnector.get(100);
             int size = message.getEntries().size();
             if (size==0)
@@ -31,21 +32,23 @@ public class CanalApp {
                     e.printStackTrace();
                 }
             }else {
+                //获得Entries
                 for (CanalEntry.Entry entry : message.getEntries()) {
                     //判断事件类型 只处理 行变化业务
                     if (entry.getEntryType().equals(CanalEntry.EntryType.ROWDATA))
                     {
+                        //序列化
                         ByteString storeValue = entry.getStoreValue();
                         CanalEntry.RowChange rowChange = null;
 
                         try {
+                            //得到反序列化rowChange
                             rowChange = CanalEntry.RowChange.parseFrom(storeValue);
                         } catch (InvalidProtocolBufferException e) {
                             e.printStackTrace();
                         }
 
-                        //获得行集
-
+                        //获得行集rowData
                         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
                         CanalEntry.EventType eventType = rowChange.getEventType(); //操作类型
                         String tableName = entry.getHeader().getTableName();//表明
