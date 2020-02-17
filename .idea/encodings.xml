@@ -5,11 +5,11 @@
     <file url="file://$PROJECT_DIR$/dw-chart" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-canal" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-commom" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gmall-export-sale" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-export-sale-like" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-logger" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-mock" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-publisher" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gmall-realtime" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/testModule" charset="UTF-8" />
   </component>
 </project>

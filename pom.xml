@@ -24,6 +24,7 @@
         <module>gmall-canal</module>
         <module>gmall-export-sale-like</module>
         <module>gmall-export-sale-like</module>
+        <module>testModule</module>
         <!--<module>dw-chart</module>-->
     </modules>
 
