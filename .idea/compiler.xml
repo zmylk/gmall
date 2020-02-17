@@ -6,10 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="dw-chart" />
+        <module name="gmall-canal" />
         <module name="gmall-commom" />
+        <module name="gmall-export-sale-like" />
         <module name="gmall-logger" />
         <module name="gmall-mock" />
+        <module name="gmall-publisher" />
+        <module name="gmall-realtime" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gmall-export-sale" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -21,6 +21,10 @@
         <module>gmall-logger</module>
         <module>gmall-realtime</module>
         <module>gmall-publisher</module>
+        <module>gmall-canal</module>
+        <module>gmall-export-sale-like</module>
+        <module>gmall-export-sale-like</module>
+        <!--<module>dw-chart</module>-->
     </modules>
 
     <properties>

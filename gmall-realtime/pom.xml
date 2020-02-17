@@ -37,8 +37,6 @@
             <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
         </dependency>
 
-
-
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>

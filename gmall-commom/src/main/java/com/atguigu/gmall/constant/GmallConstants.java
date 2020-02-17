@@ -11,7 +11,10 @@ public class GmallConstants 	{
     public static final String ES_INDEX_NEW_MID="gmall2019_new_mid";
     public static final String ES_INDEX_NEW_ORDER="gmall2019_new_order";
     public static final String ES_INDEX_SALE_DETAIL="gmall2019_sale_detail";
+    public static final String ES_INDEX_ORDER="gmall_new_order";
 
+
+    public static final String ES_INDEX_SALE="gmall_sale_detail";
 
 }
  
